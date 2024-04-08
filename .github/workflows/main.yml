@@ -10,23 +10,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-    - name: Install SSH and sshpass
-      run: |
-        sudo apt-get install -y openssh-client sshpass
+      - name: Install SSH and sshpass
+        run: |
+          sudo apt-get install -y openssh-client sshpass
 
-    - name: SSH into server and run commands
-      run: |
-        sshpass -p "${{ secrets.PASSWORD }}" \
-        ssh -T -p "${{ secrets.PORT }}" -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" << EOF
-        cd //var/www/bot/pranav  # Specify the deployment directory here
-        git pull origin main  # Replace 'main' with your branch if it's different
-        if [ $? -eq 0 ]; then
-          echo "Success"
-        else
-          echo "Failed to pull code"
-          exit 1
-        fi
-        EOF
+      - name: SSH into server and run commands
+        run: |
+          sshpass -p "${{ secrets.PASSWORD }}" \
+          ssh -T -p "${{ secrets.PORT }}" -o StrictHostKeyChecking=no "${{ secrets.USERNAME }}"@"${{ secrets.HOST }}" << EOF
+          cd /var/www/bot/pranav  # Specify the deployment directory here
+          git pull origin main  # Replace 'main' with your branch if it's different
+          if [ $? -eq 0 ]; then
+            echo "Success"
+          else
+            echo "Failed to pull code"
+            exit 1
+          fi
+          EOF
