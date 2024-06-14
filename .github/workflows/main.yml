@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - main  # Change this to your main branch
-
+      
 jobs:
   deploy:
     runs-on: self-hosted
