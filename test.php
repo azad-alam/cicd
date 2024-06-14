@@ -1,3 +1,3 @@
 <?php
-echo "hi workding";
+echo "hi changed path";
   ?>
